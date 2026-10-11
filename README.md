@@ -1,17 +1,64 @@
-# RealTime-Virtual-Whiteboard
-The project aims to create an interactive whiteboard that allows users to draw on a canvas using hand gestures. The application utilizes a webcam to capture hand movements and Mediapipe to detect and track hand landmarks for gesture recognition.
+# RealTime Virtual Whiteboard
 
-# Key Features
-Color Selection: Users can select different colors (Blue, Green, Red, Yellow) for drawing by positioning their hand over specific color buttons displayed on the screen. A "CLEAR" button allows users to reset the drawing area.
+Draw on a virtual whiteboard in the air using hand gestures. Your webcam tracks your index finger with MediaPipe and draws in real time, with no mouse or touchscreen needed.
 
-Drawing Mechanism: The system tracks the position of the user's index finger to draw lines on the canvas. Drawing starts when the index finger is close to the thumb (pinching gesture).
+## Features
+- Real-time hand tracking (single hand)
+- Air drawing with the index finger
+- 4 colors: Blue, Green, Red, Yellow
+- CLEAR button to reset the canvas
+- Strokes shown on both the camera feed and a separate white canvas
 
-Canvas and UI: The application displays a whiteboard area where users can draw. Color buttons and the clear button are displayed on the side of the canvas for easy access.
+## Tech Stack
+- Python
+- OpenCV
+- MediaPipe
+- NumPy
 
-Real-Time Interaction: The webcam feed is processed in real-time to update the canvas with the user's drawing. Hand landmarks are detected using Mediapipe, and their positions are used to control the drawing functionality. Technical Details
+## Project Structure
+├── main.py # entire application
+├── whiteboard.png # preview image
+└── README.md
 
-Libraries Used: OpenCV: For image processing and GUI creation. NumPy: For handling image arrays. Mediapipe: For hand gesture recognition and landmark detection. deque from collections: For managing and storing drawing points efficiently.
+## Installation
+```bash
+git clone https://github.com/Bipra09/RealTime-Virtual-Whiteboard.git
+cd RealTime-Virtual-Whiteboard
+pip install opencv-python mediapipe numpy
+```
 
-Main Components: Color Points Handling: Different deque lists manage drawing points for each color. Gesture Recognition: Detects hand positions and gestures to perform actions like drawing and color selection.
+## Usage
+```bash
+python main.py
+```
 
-Drawing and UI: Handles drawing on the canvas and updates the user interface in real-time.
+Two windows open: **Output** (webcam with landmarks) and **Paint** (canvas).
+
+## Controls
+| Action | Gesture |
+|---|---|
+| Draw | Extend index finger up, away from thumb |
+| Lift pen (start new stroke) | Bring index fingertip down near thumb level |
+| Select color / Clear | Hover index finger over a button in the top bar |
+| Quit | Press `q` |
+
+## How It Works
+1. Webcam frames are mirrored and passed to MediaPipe Hands
+2. Index fingertip (landmark 8) and thumb tip (landmark 4) are tracked
+3. Fingertip positions are stored per color in `deque` buffers
+4. Lines are drawn between consecutive points on both windows
+5. Hovering over a top-bar button changes color or clears the canvas
+
+## Notes
+- Use good lighting and a plain background
+- Keep your hand fully in frame, with the palm facing the camera
+- Designed for a 640×480 webcam feed
+
+## Future Improvements
+- Eraser and brush size control
+- Save canvas as image
+- More colors
+- Multi-hand support
+
+## License
+MIT
