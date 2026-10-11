@@ -59,6 +59,9 @@ Two windows open: **Output** (webcam with landmarks) and **Paint** (canvas).
 - Save canvas as image
 - More colors
 - Multi-hand support
+  
+## Author 👨‍💻
+ [Bipra_Biswas](https://github.com/Bipra09)
 
 ## License
 MIT
